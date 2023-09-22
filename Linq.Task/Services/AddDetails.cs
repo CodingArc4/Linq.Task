@@ -14,69 +14,78 @@ namespace Linq.Task.Services
         //method to add internship details
         public static List<Internship> SeedData()
         {
+               
+            string internshipName, companyName, companyLocation, comapnyIndustry, skillsInput;
+            int salary, duration;
+            double rating;
+            bool isRemote;
+            List<string> requiredSkills;
+            DateTime startDate;
+
+            
             Console.WriteLine("Enter Intership details");
-            //while (true)
-            //{
+    
+            //internship name
+            Console.Write("Enter internship name: ");
+            internshipName = Console.ReadLine();
+            
+            //company name
+            Console.Write("Enter company name: ");
+            companyName = Console.ReadLine();
+                
+            //company location
+            Console.Write("Enter company location: ");
+            companyLocation = Console.ReadLine();
 
-                Console.Write("Enter internship name: ");
-                string internshipName = Console.ReadLine();
-                ////condition to exit the program
-                //if (internshipName.ToLower() == "q")
-                //    break;
+            //company industry
+            Console.Write("Enter company industry: ");
+            comapnyIndustry = Console.ReadLine();
 
-                Console.Write("Enter company name: ");
-                string companyName = Console.ReadLine();
-
-                Console.Write("Enter company location: ");
-                string companyLocation = Console.ReadLine();
-
-                Console.Write("Enter company industry: ");
-                string companyIndustry = Console.ReadLine();
-
+            //internship salary
+            do {
                 Console.Write("Enter internship salary: ");
-                if (!int.TryParse(Console.ReadLine(), out int salary))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid salary.");
-                    
-                }
+            } while (!int.TryParse(Console.ReadLine(), out salary));
 
+            //internship start date
+            do {
                 Console.Write("Enter internship start date (yyyy-mm-dd): ");
-                if (!DateTime.TryParse(Console.ReadLine(), out DateTime startDate))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid start date.");
-                    
-                }
+            }
+            while (!DateTime.TryParse(Console.ReadLine(), out startDate));
+           
+            //skills
+            Console.Write("Enter required skills (comma-separated): ");
+            skillsInput = Console.ReadLine();
+            requiredSkills = skillsInput.Split(',').Select(s => s.Trim()).ToList();
 
-                Console.Write("Enter required skills (comma-separated): ");
-                string skillsInput = Console.ReadLine();
-                List<string> requiredSkills = skillsInput.Split(',').Select(s => s.Trim()).ToList();
-
+            //duration of internship in weeks
+            do
+            {
                 Console.Write("Enter internship duration in weeks: ");
-                if (!int.TryParse(Console.ReadLine(), out int duration))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid duration.");
-                    
-                }
+            }
+            while (!int.TryParse(Console.ReadLine(), out duration));
+            
 
-                Console.Write("Is the internship remote? (yes/no): ");
-                bool isRemote = Console.ReadLine().ToLower() == "yes";
+            //is internship remote?
+            Console.Write("Is the internship remote? (yes/no): ");
+            isRemote = Console.ReadLine().ToLower() == "yes";
 
+            //internship rating
+            do
+            {
                 Console.Write("Enter internship average rating: ");
-                if (!double.TryParse(Console.ReadLine(), out double rating))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid rating.");
-                    
-                }
-
+            }
+            while (!double.TryParse(Console.ReadLine(), out rating));
+             
                 // Create an Internship object based on user input
-                var internship = new Internship
-                {
+             
+            var internship = new Internship
+            {
                     Name = internshipName,
-                    Company = new Company 
-                    {     
-                        Name = companyName, 
-                        Location = companyLocation, 
-                        Industry = companyIndustry 
+                    Company = new Company
+                    {
+                        Name = companyName,
+                        Location = companyLocation,
+                        Industry = comapnyIndustry
                     },
                     Details = new InternshipDetails
                     {
@@ -90,17 +99,9 @@ namespace Linq.Task.Services
                     {
                          new Review { Rating = rating }
                     }
-                };
+            };
 
-                InternDetails.Add(internship);
-                //Console.WriteLine("Internship added.");
-
-                //Console.WriteLine();
-
-                // Display the details of the added internship
-               ///  DisplayDetails.DisplayInternshipDetails(internship);
-
-            //}
+            InternDetails.Add(internship);
             return InternDetails;
         }
 

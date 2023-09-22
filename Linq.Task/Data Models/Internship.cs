@@ -10,8 +10,8 @@ namespace Linq.Task.Data_Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Company { get; set; }
-        public string Details { get; set; }
+        public Company Company { get; set; }
+        public InternshipDetails Details { get; set; }
         public List<Review> Reviews { get; set; }
     }
 }

@@ -45,7 +45,7 @@ namespace Linq.Task
             {
                 Console.WriteLine();
                 Console.WriteLine("Adding Internships:");
-                internships = AddDetails.SeedData();
+                internships = Services.Services.SeedData();
 
                 Console.WriteLine();
                 Console.WriteLine("Displaying Internships:");
@@ -58,9 +58,11 @@ namespace Linq.Task
             //method to filter and display internships
             static void FilterAndDisplayInternships()
             {
+                Console.WriteLine();
                 if (internships.Count == 0)
                 {
                     Console.WriteLine("No internships available. Please add internships first.");
+                    Console.WriteLine();
                     return;
                 }
 
@@ -98,7 +100,7 @@ namespace Linq.Task
                 }
 
                 // Filter internships
-                var filteredInternships = AddDetails.FilterInternship(filter);
+                var filteredInternships = Services.Services.FilterInternship(filter);
 
                 if (filteredInternships.Any())
                 {
@@ -116,6 +118,7 @@ namespace Linq.Task
                 }
                 else
                 {
+                    Console.WriteLine();
                     Console.WriteLine("No internships matched.");
                 }
             }
@@ -126,7 +129,7 @@ namespace Linq.Task
                 Console.WriteLine();
                 Console.WriteLine("Deleting an Internship:");
 
-                if (AddDetails.InternDetails.Count == 0)
+                if (Services.Services.InternDetails.Count == 0)
                 {
                     Console.WriteLine("No internships available to delete.");
                     Console.WriteLine();
@@ -139,8 +142,9 @@ namespace Linq.Task
                 {
                     // Call the Delete method with the entered ID to remove the internship
                     Console.WriteLine();
-                    AddDetails.Delete(internshipId);
+                    Services.Services.Delete(internshipId);
                     Console.WriteLine("Internship deleted successfully.");
+                    Console.WriteLine() ;
                 }
                 else
                 {

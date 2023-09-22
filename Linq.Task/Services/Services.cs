@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Linq.Task.Services
 {
-    internal class AddDetails
+    internal class Services
     {
         public static List<Internship> InternDetails = new List<Internship>();
         public static int id = 1;

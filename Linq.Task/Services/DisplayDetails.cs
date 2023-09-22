@@ -13,6 +13,7 @@ namespace Linq.Task.Services
         public static void DisplayInternshipDetails(Internship internship)
         {
             Console.WriteLine("Internship Details:");
+            Console.WriteLine($"Id: {internship.Id}");
             Console.WriteLine($"Name: {internship.Name}");
             Console.WriteLine($"Company Name: {internship.Company.Name}");
             Console.WriteLine($"Company Location: {internship.Company.Location}");

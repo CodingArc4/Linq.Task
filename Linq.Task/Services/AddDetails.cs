@@ -1,6 +1,7 @@
 ﻿using Linq.Task.Data_Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +10,13 @@ namespace Linq.Task.Services
 {
     internal class AddDetails
     {
-        public static List<Internship> InternDetails = new List<Internship>(); 
+        public static List<Internship> InternDetails = new List<Internship>();
+        public static int id = 1;
 
         //method to add internship details
         public static List<Internship> SeedData()
         {
-               
+           
             string internshipName, companyName, companyLocation, comapnyIndustry, skillsInput;
             int salary, duration;
             double rating;
@@ -24,7 +26,7 @@ namespace Linq.Task.Services
 
             
             Console.WriteLine("Enter Intership details");
-    
+
             //internship name
             Console.Write("Enter internship name: ");
             internshipName = Console.ReadLine();
@@ -75,33 +77,34 @@ namespace Linq.Task.Services
                 Console.Write("Enter internship average rating: ");
             }
             while (!double.TryParse(Console.ReadLine(), out rating));
-             
-                // Create an Internship object based on user input
-             
+
+            // Create an Internship object based on user input  
             var internship = new Internship
             {
-                    Name = internshipName,
-                    Company = new Company
-                    {
+                Id = id,
+                Name = internshipName,
+                Company = new Company
+                {
                         Name = companyName,
                         Location = companyLocation,
                         Industry = comapnyIndustry
-                    },
-                    Details = new InternshipDetails
-                    {
+                },
+                Details = new InternshipDetails
+                {
                         Salary = salary,
                         StartDate = startDate,
                         Skills = requiredSkills,
                         Duration = duration,
                         IsRemote = isRemote
-                    },
-                    Reviews = new List<Review>
-                    {
+                },
+                Reviews = new List<Review>
+                {
                          new Review { Rating = rating }
-                    }
+                }
             };
 
             InternDetails.Add(internship);
+            id++;
             return InternDetails;
         }
 
@@ -132,6 +135,13 @@ namespace Linq.Task.Services
             IEnumerable<IGrouping<string,Internship>>  groupedList = sortedlist.GroupBy(x => x.Company.Industry);  
 
             return groupedList.ToList();
+        }
+
+        //method to delete internee 
+        public static void Delete(int id)
+        {
+            var delete = InternDetails.FirstOrDefault(x => x.Id  == id);
+            InternDetails.Remove(delete);
         }
     }
 }

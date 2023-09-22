@@ -14,6 +14,7 @@ namespace Linq.Task
                 Console.WriteLine("Options:");
                 Console.WriteLine("1. Add and Display Internships");
                 Console.WriteLine("2. Filter and Display Internships");
+                Console.WriteLine("3. Delete an Internship");
                 Console.WriteLine("0. Exit");
 
                 Console.Write("Enter your choice: ");
@@ -26,6 +27,9 @@ namespace Linq.Task
                         break;
                     case 2:
                         FilterAndDisplayInternships();
+                        break;
+                    case 3:
+                        DeleteInternship();
                         break;
                     case 0:
                         return;
@@ -116,6 +120,33 @@ namespace Linq.Task
                 }
             }
 
+            //delete internship method
+            static void DeleteInternship()
+            {
+                Console.WriteLine();
+                Console.WriteLine("Deleting an Internship:");
+
+                if (AddDetails.InternDetails.Count == 0)
+                {
+                    Console.WriteLine("No internships available to delete.");
+                    Console.WriteLine();
+                    return;
+                }
+
+                Console.WriteLine();
+                Console.Write("Enter the ID of the internship you want to delete: ");
+                if (int.TryParse(Console.ReadLine(), out int internshipId))
+                {
+                    // Call the Delete method with the entered ID to remove the internship
+                    Console.WriteLine();
+                    AddDetails.Delete(internshipId);
+                    Console.WriteLine("Internship deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid internship ID.");
+                }
+            }
         }
     }
 }

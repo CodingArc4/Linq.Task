@@ -86,6 +86,13 @@ namespace Linq.Task
                     filter.Reviews.Add(new Review { Rating = Rating });
                 }
 
+                Console.Write("Enter the duration (leave empty for no filter): ");
+                if (!int.TryParse(Console.ReadLine(), out int duration))
+                {
+                    filter.Details.Duration = duration;
+
+                }
+
                 // Filter internships
                 var filteredInternships = AddDetails.FilterInternship(filter);
 

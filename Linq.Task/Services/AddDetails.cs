@@ -120,7 +120,14 @@ namespace Linq.Task.Services
             
                  ).ToList();
 
-            return filter;
+            //sorting the filtered data
+            var sortedlist = filter
+                            .OrderByDescending(x => x.Reviews.Average(x => x.Rating))
+                            .ThenByDescending(x => x.Details.Salary)
+                            .ThenBy(x => x.Details.Duration)
+                            .ThenBy(x => x.Company.Name).ToList();
+
+            return sortedlist;
         }
     }
 }

@@ -106,7 +106,7 @@ namespace Linq.Task.Services
         }
 
         //method to filter inputs
-        public static List<Internship> FilterInternship(Internship internship)
+        public static List<IGrouping<string,Internship>> FilterInternship(Internship internship)
         {
             //filternig data
             var filter = InternDetails.Where(intern =>
@@ -128,7 +128,10 @@ namespace Linq.Task.Services
                             .ThenBy(x => x.Details.Duration)
                             .ThenBy(x => x.Company.Name).ToList();
 
-            return sortedlist;
+            //grouping the sorted data
+            IEnumerable<IGrouping<string,Internship>>  groupedList = sortedlist.GroupBy(x => x.Company.Industry);  
+
+            return groupedList.ToList();
         }
     }
 }

@@ -102,8 +102,12 @@ namespace Linq.Task
                     Console.WriteLine("Filtered Internships:");
                     foreach (var internship in filteredInternships)
                     {
-                        Console.WriteLine();
-                        DisplayDetails.DisplayInternshipDetails(internship);
+                        foreach(var item in internship)
+                        {
+                            Console.WriteLine();
+                            DisplayDetails.DisplayInternshipDetails(item);
+                        }
+                       
                     }
                 }
                 else
